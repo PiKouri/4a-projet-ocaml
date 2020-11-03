@@ -1,0 +1,9 @@
+# ignores everything
+/*
+# but do not ignore the .gitignore file
+!.gitignore
+!*.ml
+!*.mli
+!*.sh
+!graph1
+!graph1.svg
