@@ -27,7 +27,7 @@ let write_file path graph =
   fprintf ff "%% This is a graph.\n\n" ;
 
   (* Write all nodes (with fake coordinates) *)
-  n_iter_sorted graph (fun id -> fprintf ff "n %.1f 1.0\n" (float_of_int id)) ;
+  n_iter_sorted graph (fun id -> fprintf ff "n %d 1.0\n" id) ;
   fprintf ff "\n" ;
 
   (* Write all arcs *)
@@ -40,7 +40,7 @@ let write_file path graph =
 
 (* Reads a line with a node. *)
 let read_node id graph line =
-  try Scanf.sscanf line "n %f %f" (fun _ _ -> new_node graph id)
+  try Scanf.sscanf line "n %d %d" (fun id1 id2 -> new_node graph id1)
   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
