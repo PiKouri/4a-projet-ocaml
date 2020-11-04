@@ -5,5 +5,5 @@
 !*.ml
 !*.mli
 !*.sh
-!graph1
+!graph1.txt
 !graph1.svg
