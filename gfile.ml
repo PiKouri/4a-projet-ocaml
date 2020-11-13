@@ -40,7 +40,7 @@ let write_file path graph =
 
 (* Reads a line with a node. *)
 let read_node id graph line =
-  try Scanf.sscanf line "n %d %d" (fun id1 id2 -> new_node graph id1)
+  try Scanf.sscanf line "n %d %d" (fun id1 id2 -> new_node graph id)
   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
@@ -99,3 +99,55 @@ let from_file path =
   close_in infile ;
   final_graph
   
+let export pathin pathout = 
+	let ff = open_out pathout in
+	let infile = open_in pathin in
+
+	let () = fprintf ff 
+"digraph finite_state_machine {\n
+	rankdir=LR;\n
+	size=\"8,5\"\n
+	node [shape = circle];" in
+
+	(* Read all lines until end of file. 
+	* n is the current node counter. *)
+	let rec loop n inter=
+	try
+		let line = input_line infile in
+
+		(* Remove leading and trailing spaces. *)
+		let line = String.trim line in
+
+		let inter2 = if line = "" then inter
+		else match line.[0] with
+			| 'n' -> true
+			| 'e' -> false 
+			| _ -> false
+		in
+
+		let n2 =
+		(* Ignore empty lines *)
+			if line = "" then if inter2 then let () = fprintf ff ";\n" in n else n
+
+			(* The first character of a line determines its content : n or e. *)
+			else match line.[0] with
+				| 'n' -> let () = fprintf ff "%d " n in n+1
+				| 'e' -> let () = Scanf.sscanf line "e %d %d %d" (fprintf ff "%d -> %d [ label = \"%d\" ] ;\n") in n+1
+					 	 
+
+				(* It should be a comment, otherwise we complain. *)
+				| _ -> n
+
+		in 
+		let inter2 = if inter2 then false else inter2 in  
+		loop n2 inter2; 
+		()
+
+	with End_of_file -> ()
+	in loop 0 false;
+	
+	fprintf ff "}\n"	;
+	
+	close_in infile ;
+	close_out ff ;
+	()
