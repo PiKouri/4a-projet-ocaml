@@ -15,3 +15,11 @@ let gmap gr f = let new_graph = clone_nodes gr
 let add_arc gr id1 id2 n = match (find_arc gr id1 id2) with
 	| None -> new_arc gr id1 id2 n
 	| Some x -> new_arc gr id1 id2 (x+n)
+
+let adjacent_nodes gr id1 = 
+	let adj_nodes = (List.map (out_arcs gr id1) (fun (id, lbl) -> id) in
+	let rec loop gr id1 id2 = 
+		try if (List.mem id1 (out_arcs gr id2)) then [id2 | loop gr id1 (id2+1)]
+			else (loop gr id1 (id2+1))
+		with Graph_error -> []
+	in List.append (loop gr id1 0) adj_nodes

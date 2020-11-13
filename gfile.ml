@@ -111,40 +111,29 @@ let export pathin pathout =
 
 	(* Read all lines until end of file. 
 	* n is the current node counter. *)
-	let rec loop n inter=
+	let rec loop n=
 	try
 		let line = input_line infile in
 
 		(* Remove leading and trailing spaces. *)
 		let line = String.trim line in
 
-		let inter2 = if line = "" then inter
-		else match line.[0] with
-			| 'n' -> true
-			| 'e' -> false 
-			| _ -> false
-		in
-
 		let n2 =
 		(* Ignore empty lines *)
-			if line = "" then if inter2 then let () = fprintf ff ";\n" in n else n
+			if line = "" then n
 
 			(* The first character of a line determines its content : n or e. *)
 			else match line.[0] with
 				| 'n' -> let () = fprintf ff "%d " n in n+1
 				| 'e' -> let () = Scanf.sscanf line "e %d %d %d" (fprintf ff "%d -> %d [ label = \"%d\" ] ;\n") in n+1
-					 	 
-
 				(* It should be a comment, otherwise we complain. *)
 				| _ -> n
-
 		in 
-		let inter2 = if inter2 then false else inter2 in  
-		loop n2 inter2; 
+		loop n2; 
 		()
 
 	with End_of_file -> ()
-	in loop 0 false;
+	in loop 0;
 	
 	fprintf ff "}\n"	;
 	
