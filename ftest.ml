@@ -29,7 +29,24 @@ let () =
   let new_graph2 = add_arc new_graph 3 5 150 in
   (* Rewrite the graph that has been read. *)
   let () = write_file outfile (gmap new_graph2 (string_of_int)) in*)
-  let () = export infile outfile in
+
+	let graph = from_file infile in
+	let int_graph = gmap graph (int_of_string) in
+	let new_graph = init_graph int_graph in
+
+	let () = export infile outfile in
+
+(* TEST adjacent_nodes *)
+	
+	Printf.printf("TEST adjacent_nodes\n%!");
+	let adj = adjacent_nodes int_graph 3 in
+	List.iter (Printf.printf("%d\n%!")) adj;
+
+(* TEST chercher_chemin *)
+
+	Printf.printf("TEST chercher_chemin\n%!");
+	let chemin = chercher_chemin new_graph 0 5 in
+	List.iter (fun (id1, id2) -> Printf.printf("(%d,%d)\n%!") id1 id2) chemin;
 
   ()
 
