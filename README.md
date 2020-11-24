@@ -7,8 +7,8 @@
   * HOK Jean-Rémy  
   * MOUKHLIS Nabil
 
-## Etape 1 : blabla
-
-- blabla
-
-blabla
+## Graphe initial 
+!Graphe initial("Graph initial.png")
+## Débit trouvé : 25
+## Graphe résultat
+!Graphe initial("Graph Resultat.png")
