@@ -125,7 +125,7 @@ let export pathin pathout =
 			(* The first character of a line determines its content : n or e. *)
 			else match line.[0] with
 				| 'n' -> let () = fprintf ff "%d " n in n+1
-				| 'e' -> let () = Scanf.sscanf line "e %d %d %d" (fprintf ff "%d -> %d [ label = \"%d\" ] ;\n") in n+1
+				| 'e' -> let () = Scanf.sscanf line "e %d %d %s" (fprintf ff "%d -> %d [ label = \"%s\" ] ;\n") in n+1
 				(* It should be a comment, otherwise we complain. *)
 				| _ -> n
 		in 

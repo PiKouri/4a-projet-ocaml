@@ -30,11 +30,12 @@ let () =
   (* Rewrite the graph that has been read. *)
   let () = write_file outfile (gmap new_graph2 (string_of_int)) in*)
 
-	let graph = from_file infile in
-	let int_graph = gmap graph (int_of_string) in
-	let new_graph = init_graph int_graph in
-
 	let () = export infile outfile in
+
+	(*let graph = from_file infile in
+	let int_graph = gmap graph (int_of_string) in
+	(*let new_graph = init_graph int_graph in
+
 
 (* TEST adjacent_nodes *)
 	
@@ -46,7 +47,34 @@ let () =
 
 	Printf.printf("TEST chercher_chemin\n%!");
 	let chemin = chercher_chemin new_graph 0 5 in
-	List.iter (fun (id1, id2) -> Printf.printf("(%d,%d)\n%!") id1 id2) chemin;
+	List.iter (fun (id1, id2) -> Printf.printf("(%d,%d)\n%!") id1 id2) 	chemin;
+
+(* TEST calcul_variation_flot *)
+
+	Printf.printf("TEST calcul_variation_flot\n%!");
+	let variation_chemin = calcul_variation_flot new_graph chemin in
+	Printf.printf "Variation du chemin : %d\n%!" variation_chemin;
+
+(* TEST add_flot_to_chemin *)
+
+	Printf.printf("TEST add_flot_to_chemin\n%!");
+	let modified_graph = add_flot_to_chemin new_graph variation_chemin chemin in
+	(*Ajoute 8 au chemin (0,2) (2,4) (4,5)*)
+	let chemin_inverse = [(5,4);(4,2);(2,0)] in
+	let modified_graph = add_flot_to_chemin modified_graph 3 chemin_inverse in
+	(*Enlève 3 au chemin*)
+
+	(* en deux fois *)
+	let string_graph = flot_graph_to_string modified_graph in
+	let () = write_file outfile string_graph in*)
+
+(* TEST ffalgorithm *)
+
+	Printf.printf("TEST ffalgorithm\n%!");
+	
+	let (new_graph, debit) = ffalgorithm int_graph _source _sink in
+	Printf.printf "Debit trouvé : %d\n%!" debit;
+	let () = write_file outfile (flot_graph_to_string new_graph) in*)
 
   ()
 
