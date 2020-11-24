@@ -8,7 +8,7 @@
   * MOUKHLIS Nabil
 
 ## Graphe initial 
-![Graphe initial]("Graph initial.png")
+![Graphe initial](https://github.com/PiKouri/4a-projet-ocaml/blob/master/Graph%20initial.png)
 ## Débit trouvé : 25
 ## Graphe résultat
-![Graphe Resultat]("Graph Resultat.png")
+![Graphe Resultat](https://github.com/PiKouri/4a-projet-ocaml/blob/master/Graph%20Resultat.png)
