@@ -25,3 +25,5 @@ then id2 :: loop gr id1 (id2+1)
 			else (loop gr id1 (id2+1))
 		with Graph_error s -> []
 	in List.append (loop gr id1 0) adj_nodes
+
+let graph_length gr = n_fold gr (fun length _ -> length+1) 0

@@ -30,11 +30,10 @@ let () =
   (* Rewrite the graph that has been read. *)
   let () = write_file outfile (gmap new_graph2 (string_of_int)) in*)
 
-	let () = export infile outfile in
 
-	(*let graph = from_file infile in
+	let graph = from_file infile in
 	let int_graph = gmap graph (int_of_string) in
-	(*let new_graph = init_graph int_graph in
+	let new_graph = init_graph int_graph in
 
 
 (* TEST adjacent_nodes *)
@@ -57,16 +56,16 @@ let () =
 
 (* TEST add_flot_to_chemin *)
 
-	Printf.printf("TEST add_flot_to_chemin\n%!");
+	(*Printf.printf("TEST add_flot_to_chemin\n%!");
 	let modified_graph = add_flot_to_chemin new_graph variation_chemin chemin in
 	(*Ajoute 8 au chemin (0,2) (2,4) (4,5)*)
 	let chemin_inverse = [(5,4);(4,2);(2,0)] in
 	let modified_graph = add_flot_to_chemin modified_graph 3 chemin_inverse in
 	(*Enlève 3 au chemin*)
 
-	(* en deux fois *)
 	let string_graph = flot_graph_to_string modified_graph in
-	let () = write_file outfile string_graph in*)
+	let () = write_file outfile string_graph in
+	let () = export outfile "graphdot.txt" in*)
 
 (* TEST ffalgorithm *)
 
@@ -74,7 +73,9 @@ let () =
 	
 	let (new_graph, debit) = ffalgorithm int_graph _source _sink in
 	Printf.printf "Debit trouvé : %d\n%!" debit;
-	let () = write_file outfile (flot_graph_to_string new_graph) in*)
+	let () = write_file outfile (flot_graph_to_string new_graph) in
+	
+	let () = export outfile "graphdot.txt" in
 
   ()
 

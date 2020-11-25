@@ -24,7 +24,7 @@ let chercher_chemin gr id1 id2 =
 (adjacent_nodes gr id1) in
 		List.iter (fun id -> loop gr id id2 [(id1,id) | acu]) filtered_nodes
 	in loop gr id1 id2 []*)
-	let tab_etat = Array.make (id2+1) Blanc in
+	let tab_etat = Array.make (graph_length gr) Blanc in
 	Array.set tab_etat id1 Gris;
 	let pile = Stack.create () in
 	Stack.push id1 pile;
@@ -81,8 +81,6 @@ let add_flot_to_arc gr variation_flot (id1,id2)=
 
 let add_flot_to_chemin gr variation chemin = 		
 	List.fold_left (fun gr (id1,id2) -> add_flot_to_arc gr variation (id1,id2)) gr chemin
-
-let final_graph graph = gmap graph (fun (flot,capacite) -> flot)
 
 let ffalgorithm graph source sink = 
 	let new_graph = init_graph graph in
