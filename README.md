@@ -13,6 +13,9 @@
 ### Débit trouvé : 25
 ### Graphe résultat
 ![Graphe Resultat](https://github.com/PiKouri/4a-projet-ocaml/blob/master/Graph_Resultat.png)
+### Utilisation
+* ./compile.sh
+* ./ftest.byte infile source sink outfile (Note : un fichier graphdot.txt est créé et permet de visualiser le graphe résultat)
 
 ## Problème Covoiturage
 ### Fichier texte d'entrée
@@ -20,3 +23,6 @@
 ### Débit trouvé : 5 (5 Personnes)
 ### Graphe résultat
 ![Covoit Result](https://github.com/PiKouri/4a-projet-ocaml/blob/master/Covoit_Result.png)
+### Utilisation
+* ./compile.sh
+* ./ftest.byte infile outfile (Note : un fichier graphdot.txt est créé et permet de visualiser le graphe résultat)
